@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">ATMO 972</string>
+    <string name="message_date">Date : </string>
+    <string name="message_indice">Indice : </string>
+    <string name="title_acceuil">Acceuil</string>
+    <string name="a_propos">À propos</string>
+    <string name="contacter">Nous contacter</string>
+</resources>
