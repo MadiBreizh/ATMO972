@@ -1,10 +1,12 @@
 package com.example.eag.myapplication;
 
+import java.io.Serializable;
+
 /**
  * Created by EAG on 30/08/2017.
  */
 
-public class AtmoElement {
+public class AtmoElement implements Serializable {
 
     private String date, indice;
 

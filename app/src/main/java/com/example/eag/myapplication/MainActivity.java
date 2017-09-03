@@ -1,12 +1,16 @@
 package com.example.eag.myapplication;
 
+import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.CardView;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,28 +28,62 @@ public class MainActivity extends AppCompatActivity {
 
     TextView tvDate;
     TextView tvIndice;
+    CardView cardView;
 
-    RecyclerView rvHistoriqueATMO;
-
-    AtmoAdaptateur atmoAdaptateur;
+    AtmoElement[] atmoElements = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_historique);
+        setContentView(R.layout.activity_main);
 
         tvDate = (TextView)findViewById(R.id.tvDate);
         tvIndice = (TextView)findViewById(R.id.tvIndice);
-        rvHistoriqueATMO = (RecyclerView) findViewById(R.id.rvHistorique);
+        cardView = (CardView)findViewById(R.id.cvATMO);
 
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Context context = getApplicationContext();
+                Intent intent = new Intent(context, HistoriqueActivity.class);
+                intent.putExtra(HistoriqueActivity.ATMO_KEY, atmoElements);
+                context.startActivity(intent);
+            }
+        });
         new atmoMadininair().execute();
+    }
+
+    //ajout d'un menu personnaliser
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_acceuil, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    //action à mener sur le clic d'une option
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.menu_actualiser:
+                //TODO : A verifier si cela actualise le Recycler View
+                new atmoMadininair().execute();
+                return true;
+            case R.id.menu_a_propos:
+                return true;
+            case R.id.menu_contact:
+                return true;
+            case android.R.id.home:
+                NavUtils.navigateUpFromSameTask(this);
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private class atmoMadininair extends AsyncTask<Void, Void, AtmoElement[]>{
 
         @Override
         protected AtmoElement[] doInBackground(Void... params) {
-            int nbrJourAntérieur = -30;
+            int nbrJourAntérieur = -10;
 
             Uri.Builder uriBuilder = new Uri.Builder();
 
@@ -64,9 +102,6 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
-
-            AtmoElement[] atmoElements = null;
-
             try{
                 atmoElements = parseUrlMadininair(url);
             } catch (IOException e) {
@@ -83,12 +118,9 @@ public class MainActivity extends AppCompatActivity {
             if(atmoElements != null)
                 Toast.makeText(MainActivity.this, "Mise à jour réussi", Toast.LENGTH_SHORT).show();
 
-            atmoAdaptateur = new AtmoAdaptateur(atmoElements);
+            tvDate.setText(atmoElements[0].getDate());
+            tvIndice.setText(atmoElements[0].getIndice());
 
-            RecyclerView.LayoutManager  mLayoutManager = new LinearLayoutManager(getApplicationContext());
-            rvHistoriqueATMO.setLayoutManager(mLayoutManager);
-            rvHistoriqueATMO.setItemAnimator(new DefaultItemAnimator());
-            rvHistoriqueATMO.setAdapter(atmoAdaptateur);
         }
     }
 
@@ -106,8 +138,6 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < atmoElements.length ; i++) {
             atmoElements[i] = new AtmoElement(date[i], indice[i]);
         }
-
-        //inversion des éléments du tableau pour avoir en position 0 l'élément le plus rescent
 
         //inverser les éléments du tableau
         for(int i = 0; i < atmoElements.length / 2; i++)
