@@ -1,6 +1,5 @@
 package com.example.eag.myapplication;
 
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -48,9 +47,6 @@ public class HistoriqueActivity extends AppCompatActivity {
             case R.id.menu_a_propos:
                 return true;
             case R.id.menu_contact:
-                return true;
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
                 return true;
         }
         return super.onOptionsItemSelected(item);
