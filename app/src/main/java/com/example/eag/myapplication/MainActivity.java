@@ -50,7 +50,10 @@ public class MainActivity extends AppCompatActivity {
                 context.startActivity(intent);
             }
         });
-        new atmoMadininair().execute();
+
+        //Si pas encore charger (evite de relancer le parse à chaque execution de onCreate. ex: changement orientation)
+        if(atmoElements == null)
+            new atmoMadininair().execute();
     }
 
     //ajout d'un menu personnaliser
