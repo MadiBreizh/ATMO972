@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.example.eag.myapplication.HistoriqueActivity"
     tools:layout_editor_absoluteX="0dp"
-    tools:layout_editor_absoluteY="41dp">
+    tools:layout_editor_absoluteY="41dp"
+    android:orientation="vertical">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/tb_historique"

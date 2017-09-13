@@ -35,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
 
     AtmoElement[] atmoElements = null;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,13 +51,18 @@ public class MainActivity extends AppCompatActivity {
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Context context = getApplicationContext();
-                Intent intent = new Intent(context, HistoriqueActivity.class);
-                intent.putExtra(HistoriqueActivity.ATMO_KEY, atmoElements);
-                context.startActivity(intent);
+                if(atmoElements == null)
+                    Toast.makeText(MainActivity.this, "Pas de données pour l'historique", Toast.LENGTH_SHORT).show();
+                else {
+                    Context context = getApplicationContext();
+                    Intent intent = new Intent(context, HistoriqueActivity.class);
+                    intent.putExtra(HistoriqueActivity.ATMO_KEY, atmoElements);
+                    context.startActivity(intent);
+                }
             }
         });
 
+        //TODO : Implementer uns sauvegarde des donnée sur un changelebt d'orientation
         //Si pas encore charger (evite de relancer le parse à chaque execution de onCreate. ex: changement orientation)
         if(atmoElements == null)
             new atmoMadininair().execute();
@@ -96,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
 
             Uri.Builder uriBuilder = new Uri.Builder();
 
-//            String urlMadininairCSV = "http://www.madininair.fr/indice_atmo.php?dd="+Utilites.recupererDate(nbrJourAntérieur)+"&df="+Utilites.recupererDate(0);
+//          String urlMadininairCSV = "http://www.madininair.fr/indice_atmo.php?dd="+Utilites.recupererDate(nbrJourAntérieur)+"&df="+Utilites.recupererDate(0);
             uriBuilder.scheme("http")
                     .authority("www.madininair.fr")
                     .appendPath("indice_atmo.php")
@@ -124,11 +130,11 @@ public class MainActivity extends AppCompatActivity {
         protected void onPostExecute(AtmoElement[] atmoElements) {
             super.onPostExecute(atmoElements);
 
-            if(atmoElements != null)
+            if(atmoElements != null){
                 Toast.makeText(MainActivity.this, "Mise à jour réussi", Toast.LENGTH_SHORT).show();
-
-            tvDate.setText(atmoElements[0].getDate());
-            tvIndice.setText(atmoElements[0].getIndice());
+                tvDate.setText(atmoElements[0].getDate());
+                tvIndice.setText(atmoElements[0].getIndice());
+            }
 
         }
     }

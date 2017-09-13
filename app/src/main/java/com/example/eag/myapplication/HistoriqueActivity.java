@@ -3,7 +3,7 @@ package com.example.eag.myapplication;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -26,7 +26,6 @@ public class HistoriqueActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tb_historique);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         rvHistoriqueATMO = (RecyclerView) findViewById(R.id.rvHistorique);
 
@@ -34,9 +33,9 @@ public class HistoriqueActivity extends AppCompatActivity {
 
         atmoAdaptateur = new AtmoAdaptateur(atmoElements);
 
-        RecyclerView.LayoutManager  mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        //RecyclerView.LayoutManager  mLayoutManager = new LinearLayoutManager(getApplicationContext());
         // sur deux lignes
-        //RecyclerView.LayoutManager  mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
+        RecyclerView.LayoutManager  mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         rvHistoriqueATMO.setLayoutManager(mLayoutManager);
         rvHistoriqueATMO.setItemAnimator(new DefaultItemAnimator());
         rvHistoriqueATMO.setAdapter(atmoAdaptateur);
