@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -13,6 +14,7 @@ public class HistoriqueActivity extends AppCompatActivity {
     AtmoElement[] atmoElements = null;
     RecyclerView rvHistoriqueATMO;
     AtmoAdaptateur atmoAdaptateur;
+    Toolbar toolbar;
 
     public static String ATMO_KEY = "DATA_ATMO";
 
@@ -21,6 +23,11 @@ public class HistoriqueActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_historique);
 
+        toolbar = (Toolbar) findViewById(R.id.tb_historique);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
         rvHistoriqueATMO = (RecyclerView) findViewById(R.id.rvHistorique);
 
         atmoElements = (AtmoElement[]) getIntent().getSerializableExtra(ATMO_KEY);
@@ -28,6 +35,8 @@ public class HistoriqueActivity extends AppCompatActivity {
         atmoAdaptateur = new AtmoAdaptateur(atmoElements);
 
         RecyclerView.LayoutManager  mLayoutManager = new LinearLayoutManager(getApplicationContext());
+        // sur deux lignes
+        //RecyclerView.LayoutManager  mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         rvHistoriqueATMO.setLayoutManager(mLayoutManager);
         rvHistoriqueATMO.setItemAnimator(new DefaultItemAnimator());
         rvHistoriqueATMO.setAdapter(atmoAdaptateur);
@@ -48,6 +57,9 @@ public class HistoriqueActivity extends AppCompatActivity {
                 return true;
             case R.id.menu_contact:
                 return true;
+            case android.R.id.home:
+                // on ferme l'activité en cours et l'on revient à la précédente.
+                finish();
         }
         return super.onOptionsItemSelected(item);
     }

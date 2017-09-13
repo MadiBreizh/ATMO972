@@ -8,6 +8,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,12 +31,17 @@ public class MainActivity extends AppCompatActivity {
     TextView tvIndice;
     CardView cardView;
 
+    Toolbar toolbar;
+
     AtmoElement[] atmoElements = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = (Toolbar) findViewById(R.id.tb_acceuil);
+        setSupportActionBar(toolbar);
 
         tvDate = (TextView)findViewById(R.id.tvDate);
         tvIndice = (TextView)findViewById(R.id.tvIndice);
@@ -86,7 +92,7 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         protected AtmoElement[] doInBackground(Void... params) {
-            int nbrJourAntérieur = -10;
+            int nbrJourAntérieur = -20;
 
             Uri.Builder uriBuilder = new Uri.Builder();
 
