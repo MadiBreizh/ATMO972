@@ -2,13 +2,16 @@
 
 this application displays the ATMO data of the Martinique region.
 
+the data displayed is retrieved from the site : [MADININAIR](http://madininair.fr/)
+
 ### Prerequisites
 
 Android SDK > version 15
 
 ### Installing
 
-A step by step series of examples that tell you have to get a development env running
+For the moment the application is not available on the Play Store.
+You can download the application from this repository [ATMO972](ATMO972.apk)
 
 ### Permissions
 
@@ -16,7 +19,8 @@ A step by step series of examples that tell you have to get a development env ru
 
 ## Screenshots
 
-![Screenshot_page_acceuil](screenshots/Acceuil.png) ![Screenshot_page_historique](screenshots/Historique.png)
+![Screenshot_page_acceuil](screenshots/Acceuil.png)
+![Screenshot_page_historique](screenshots/Historique.png)
 
 ## Built With
 
