@@ -11,7 +11,7 @@ Android SDK > version 15
 ### Installing
 
 For the moment the application is not available on the Play Store.
-You can download the application from this repository [ATMO972](ATMO972.apk)
+You can download the application from this repository [ATMO972](APK/ATMO972.apk)
 
 ### Permissions
 
