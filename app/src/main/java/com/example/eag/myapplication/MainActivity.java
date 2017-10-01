@@ -4,13 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v4.app.NavUtils;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,7 +22,7 @@ import java.net.URL;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
     TextView tvDate;
     TextView tvIndice;
@@ -73,25 +70,6 @@ public class MainActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_acceuil, menu);
         return super.onCreateOptionsMenu(menu);
-    }
-
-    //action à mener sur le clic d'une option
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.menu_actualiser:
-                //TODO : A verifier si cela actualise le Recycler View
-                new atmoMadininair().execute();
-                return true;
-            case R.id.menu_a_propos:
-                return true;
-            case R.id.menu_contact:
-                return true;
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private class atmoMadininair extends AsyncTask<Void, Void, AtmoElement[]>{

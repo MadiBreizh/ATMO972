@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".HistoriqueActivity"></activity>
+        <activity android:name=".HistoriqueActivity" />
+        <activity android:name=".AboutActivity"></activity>
     </application>
 
 </manifest>

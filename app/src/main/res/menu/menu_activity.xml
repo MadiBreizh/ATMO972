@@ -9,9 +9,8 @@
         app:showAsAction="never"/>
 
     <item
-        android:id="@+id/menu_a_propos"
-        android:title="À propos"
+        android:id="@+id/menu_avis"
+        android:title="Noter l'application"
         android:icon="@android:drawable/ic_menu_add"
         app:showAsAction="never"/>
-
 </menu>

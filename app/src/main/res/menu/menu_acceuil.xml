@@ -15,8 +15,14 @@
         app:showAsAction="always"/>
 
     <item
-        android:id="@+id/menu_a_propos"
+        android:id="@+id/menu_about"
         android:title="À propos"
+        android:icon="@android:drawable/ic_menu_add"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/menu_avis"
+        android:title="Noter l'application"
         android:icon="@android:drawable/ic_menu_add"
         app:showAsAction="never"/>
 
