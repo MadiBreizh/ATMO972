@@ -21,7 +21,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 
-
 public class MainActivity extends BaseActivity {
 
     TextView tvDate;
@@ -62,7 +61,7 @@ public class MainActivity extends BaseActivity {
         //TODO : Implementer uns sauvegarde des donnée sur un changelebt d'orientation
         //Si pas encore charger (evite de relancer le parse à chaque execution de onCreate. ex: changement orientation)
         if(atmoElements == null)
-            new atmoMadininair().execute();
+            new AtmoMadininair().execute();
     }
 
     //ajout d'un menu personnaliser
@@ -72,15 +71,15 @@ public class MainActivity extends BaseActivity {
         return super.onCreateOptionsMenu(menu);
     }
 
-    private class atmoMadininair extends AsyncTask<Void, Void, AtmoElement[]>{
+    private class AtmoMadininair extends AsyncTask<Void, Void, AtmoElement[]> {
 
         @Override
         protected AtmoElement[] doInBackground(Void... params) {
-            int nbrJourAntérieur = -20;
+            int nbrJourAntérieur = -15;
 
             Uri.Builder uriBuilder = new Uri.Builder();
 
-//          String urlMadininairCSV = "http://www.madininair.fr/indice_atmo.php?dd="+Utilites.recupererDate(nbrJourAntérieur)+"&df="+Utilites.recupererDate(0);
+//          http://www.madininair.fr/indice_atmo.php?dd="+Utilites.recupererDate(nbrJourAntérieur)+"&df="+Utilites.recupererDate(0)
             uriBuilder.scheme("http")
                     .authority("www.madininair.fr")
                     .appendPath("indice_atmo.php")
@@ -110,7 +109,6 @@ public class MainActivity extends BaseActivity {
 
             if(atmoElements != null){
                 Toast.makeText(MainActivity.this, "Mise à jour réussi", Toast.LENGTH_SHORT).show();
-                tvDate.setText(atmoElements[0].getDate());
                 tvIndice.setText(atmoElements[0].getIndice());
             }
 

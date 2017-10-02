@@ -12,12 +12,6 @@ import android.widget.Toast;
 
 public class BaseActivity extends AppCompatActivity {
 
-    //ajout d'un menu personnaliser
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getMenuInflater().inflate(R.menu.menu_acceuil, menu);
-//        return super.onCreateOptionsMenu(menu);
-//    }
 
     //action à mener sur le clic d'une option
     @Override
@@ -25,7 +19,7 @@ public class BaseActivity extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.menu_actualiser:
                 //TODO : A verifier si cela actualise le Recycler View
-                //new MainActivity.atmoMadininair().execute();
+//                new AtmoMadininair().execute();
                 return true;
             case R.id.menu_about:
                 Context context = getApplicationContext();
@@ -37,7 +31,7 @@ public class BaseActivity extends AppCompatActivity {
                 i.setType("message/rfc822");
                 i.putExtra(Intent.EXTRA_EMAIL, new String[]{"eangot.bzh@gmail.com"});
                 i.putExtra(Intent.EXTRA_SUBJECT, "[CONTACT] - Application ATMO972");
-                i.putExtra(Intent.EXTRA_TEXT, "Laissez votre message ici");
+                //i.putExtra(Intent.EXTRA_TEXT, "Laissez votre message ici");
                 try {
                     startActivity(Intent.createChooser(i, "Envoyer Email..."));
                 }

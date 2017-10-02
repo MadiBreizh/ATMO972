@@ -62,59 +62,32 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/tvDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginLeft="15dp"
-                    android:layout_marginStart="15dp"
-                    android:layout_weight="1"
-                    android:text="N/A"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toRightOf="@+id/tvTextDate" />
-
-                <TextView
-                    android:id="@+id/tvTextDate"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginLeft="55dp"
-                    android:layout_marginStart="55dp"
-                    android:layout_weight="1"
-                    android:text="@string/message_date"
-                    android:textAppearance="@style/TextAppearance.AppCompat"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintLeft_toLeftOf="parent" />
-
-                <TextView
                     android:id="@+id/tvIndice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="1"
-                    android:layout_marginBottom="8dp"
-                    android:layout_marginEnd="55dp"
-                    android:layout_marginRight="55dp"
+                    android:layout_marginBottom="4dp"
                     android:layout_row="1"
                     android:layout_weight="1"
                     android:text="N/A"
                     android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent" />
+                    app:layout_constraintLeft_toRightOf="@+id/tvTextIndice"
+                    android:layout_marginLeft="24dp" />
 
                 <TextView
                     android:id="@+id/tvTextIndice"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_column="0"
-                    android:layout_marginBottom="17dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="15dp"
                     android:layout_row="1"
                     android:layout_weight="1"
                     android:text="@string/message_indice"
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toLeftOf="@+id/tvIndice" />
+                    android:layout_marginLeft="80dp"
+                    app:layout_constraintLeft_toLeftOf="parent" />
 
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>
