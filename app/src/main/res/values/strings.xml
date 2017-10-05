@@ -9,4 +9,6 @@
     <string name="qualite_air">Qualité de l\'air</string>
     <string name="message_empty">N/A</string>
     <string name="erwab_angot">Erwan ANGOT</string>
+    <string name="version">Version : Développement</string>
+    <string name="txt_licence"><u>Licences open source</u></string>
 </resources>
