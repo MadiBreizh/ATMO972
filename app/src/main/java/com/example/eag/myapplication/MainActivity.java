@@ -23,13 +23,11 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
-    TextView tvDate;
-    TextView tvIndice;
-    CardView cardView;
 
+    CardView cardView;
+    TextView tvIndice;
     Toolbar toolbar;
 
-    AtmoElement[] atmoElements = null;
 
 
     @Override
@@ -40,7 +38,7 @@ public class MainActivity extends BaseActivity {
         toolbar = (Toolbar) findViewById(R.id.tb_acceuil);
         setSupportActionBar(toolbar);
 
-        tvDate = (TextView)findViewById(R.id.tvDate);
+
         tvIndice = (TextView)findViewById(R.id.tvIndice);
         cardView = (CardView)findViewById(R.id.cvATMO);
 
@@ -108,7 +106,7 @@ public class MainActivity extends BaseActivity {
             super.onPostExecute(atmoElements);
 
             if(atmoElements != null){
-                Toast.makeText(MainActivity.this, "Mise à jour réussi", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Mise à jour réussi", Toast.LENGTH_SHORT).show();
                 tvIndice.setText(atmoElements[0].getIndice());
             }
 
@@ -140,4 +138,5 @@ public class MainActivity extends BaseActivity {
 
         return atmoElements;
     }
+
 }

@@ -3,16 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/menu_refresh"
+        app:showAsAction="never"
+        android:title="Rafraichir"/>
+
+    <item
         android:id="@+id/menu_contact"
         android:title="Contact"
         android:icon="@android:drawable/ic_menu_revert"
         app:showAsAction="never"/>
-
-    <item
-        android:id="@+id/menu_actualiser"
-        android:title="Actualiser"
-        android:icon="@android:drawable/ic_popup_sync"
-        app:showAsAction="always"/>
 
     <item
         android:id="@+id/menu_about"

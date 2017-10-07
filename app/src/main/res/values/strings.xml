@@ -11,4 +11,5 @@
     <string name="erwab_angot">Erwan ANGOT</string>
     <string name="version">Version : Développement</string>
     <string name="txt_licence"><u>Licences open source</u></string>
+    <string name="descrition_logo">Logo de l\'application</string>
 </resources>
