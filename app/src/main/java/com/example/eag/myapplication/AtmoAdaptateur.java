@@ -39,31 +39,34 @@ public class AtmoAdaptateur extends RecyclerView.Adapter<AtmoAdaptateur.ViewHold
         int couleur6_7 = 0xffff8800;
         int couleur8_9 = 0xffff4444;
         int couleur10 = 0xffaa66cc;
+        int couleurdefault = 0xffffffff;
 
         holder.date.setText(atmoElements[position].getDate());
         holder.indice.setText(atmoElements[position].getIndice());
-        switch (Integer.parseInt(atmoElements[position].getIndice())){
-            case 1:
-            case 2:
+        switch (atmoElements[position].getIndice()){
+            case "1":
+            case "2":
                 holder.cvIndiceAtmo.setCardBackgroundColor(couleur1_2);
                 break;
-            case 3:
-            case 4:
+            case "3":
+            case "4":
                 holder.cvIndiceAtmo.setCardBackgroundColor(couleur3_4);
                 break;
-            case 5:
+            case "5":
                 holder.cvIndiceAtmo.setCardBackgroundColor(couleur5);
                 break;
-            case 6:
-            case 7:
+            case "6":
+            case "7":
                 holder.cvIndiceAtmo.setCardBackgroundColor(couleur6_7);
                 break;
-            case 8:
-            case 9:
+            case "8":
+            case "9":
                 holder.cvIndiceAtmo.setCardBackgroundColor(couleur8_9);
                 break;
-            case 10:
+            case "10":
                 holder.cvIndiceAtmo.setCardBackgroundColor(couleur10);
+            default:
+                holder.cvIndiceAtmo.setCardBackgroundColor(couleurdefault);
         }
 
     }
