@@ -30,7 +30,7 @@ public class MainActivity extends BaseActivity {
 
 
     CardView cardView;
-    TextView tvIndice;
+    TextView tvIndice, tvStationNearly;
     Toolbar toolbar;
     StationsMadininair stationMadininair;
 
@@ -43,22 +43,22 @@ public class MainActivity extends BaseActivity {
         setSupportActionBar(toolbar);
 
         tvIndice = (TextView)findViewById(R.id.tvIndice);
+        tvStationNearly = (TextView)findViewById(R.id.tvStationNearly);
         cardView = (CardView)findViewById(R.id.cvATMO);
-
-
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
         {
-            // A Défaut, l'on force la localisation de "FDF - Lycée Bellevue"
+            // Sur Défaut, l'on force la localisation de "FDF - Lycée Bellevue"
             stationMadininair= new StationsMadininair(14.602902, 61.077537);
+            tvStationNearly.setText("Recherche d'une station à proximité impossible");
         } else
         {
             LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             //TODO: a controler si cela fonctionne avec d'autres périphériques
             Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             stationMadininair= new StationsMadininair(loc.getLatitude(), loc.getLongitude());
-            Toast.makeText(getApplicationContext(), Utilites.recupNomStation(stationMadininair.getNumStationNearly()), Toast.LENGTH_SHORT).show();
+            tvStationNearly.setText("Station proche de votre position : " + Utilites.recupNomStation(stationMadininair.getNumStationNearly()));
         }
 
 

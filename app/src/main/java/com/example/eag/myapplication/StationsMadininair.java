@@ -78,6 +78,7 @@ public class StationsMadininair {
             }
         }
 
+        //TODO : vérifier si la distance n'est pas trop grande , ce qui voudrai dire que l'utilisateur n'est pas sur l'île
         return numStationNearly;
 
     }
