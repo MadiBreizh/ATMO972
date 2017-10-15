@@ -8,20 +8,6 @@ import java.util.GregorianCalendar;
 
 public class Utilites {
 
-    /* Ne fonctionne pas lorsque l'on passe un argument en paramètre*/
-    public static String formatageDate(final String date){
-        String pattern = "dd-MM-yyyy";
-        Date dateReformat = null;
-
-        SimpleDateFormat formatter = new SimpleDateFormat(pattern);
-        try {
-            dateReformat = formatter.parse(date.toLowerCase());
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        return dateReformat.toString();
-    }
 
     public static String recupererDate(final int jour){
 
@@ -33,4 +19,36 @@ public class Utilites {
 
         return sdf.format(date);
     }
+
+    public static String recupNomStation(int numStationNearly){
+        switch (numStationNearly)
+        {
+            case 0:
+                return "FDF - Hôtel de Ville";
+            case 1:
+                return "FDF - Rocade Concorde";
+            case 2:
+                return "FDF - Renéville";
+            case 3:
+                return "FDF - Etang Z'Abricot";
+            case 4:
+                return "FDF - Lycée Bellevue";
+            case 5:
+                return "Schoelcher";
+            case 6:
+                return "Sainte-Luce";
+            case 7:
+                return "Le Robert";
+            case 8:
+                return "La Lamentin";
+            case 9:
+                return "Saint-Pierre";
+            case 10:
+                return "Le Francois";
+            default:
+                return "Inconnu";
+        }
+
+    }
+
 }

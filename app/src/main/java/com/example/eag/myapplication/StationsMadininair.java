@@ -11,7 +11,7 @@ import android.util.Log;
 public class StationsMadininair {
 
     Location positionUtilisateur;
-    int stationNearly;
+    int numStationNearly;
 
     boolean[][] etatAnalyseSite =
             {
@@ -28,13 +28,15 @@ public class StationsMadininair {
                     {false, false, false, false, false, true, false}, // François, Pointe Couchée
             };
 
+
     public StationsMadininair(double latitudePhone, double longitudePhone) {
+        positionUtilisateur = new Location("Position de l'utilisateur");
         this.positionUtilisateur.setLatitude(latitudePhone);
         this.positionUtilisateur.setLongitude(longitudePhone);
-        stationNearly = getStationNearly();
+        this.numStationNearly = recupNumStationNearly();
     }
 
-    int getStationNearly( ){
+    private int recupNumStationNearly( ){
         // On initialise à une valeur incohérente pour réaliser un controle
         int numStationNearly = 100;
         double distMinStation = 9999.0;
@@ -76,6 +78,11 @@ public class StationsMadininair {
             }
         }
 
+        return numStationNearly;
+
+    }
+
+    public int getNumStationNearly() {
         return numStationNearly;
     }
 

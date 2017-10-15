@@ -58,6 +58,7 @@ public class MainActivity extends BaseActivity {
             //TODO: a controler si cela fonctionne avec d'autres périphériques
             Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             stationMadininair= new StationsMadininair(loc.getLatitude(), loc.getLongitude());
+            Toast.makeText(getApplicationContext(), Utilites.recupNomStation(stationMadininair.getNumStationNearly()), Toast.LENGTH_SHORT).show();
         }
 
 
@@ -126,7 +127,7 @@ public class MainActivity extends BaseActivity {
             super.onPostExecute(atmoElements);
 
             if(atmoElements != null){
-                Toast.makeText(getApplicationContext(), "Mise à jour réussi", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getApplicationContext(), "Mise à jour réussi", Toast.LENGTH_SHORT).show();
                 tvIndice.setText(atmoElements[0].getIndice());
             }
 
