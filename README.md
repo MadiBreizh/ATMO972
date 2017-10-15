@@ -16,6 +16,7 @@ you can download the application from the folder [APK](APK)
 ### Permissions
 
 * INTERNET : to receive data
+* GEOlOCATION : to find station near your position
 
 ## Screenshots
 

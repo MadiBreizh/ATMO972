@@ -1,10 +1,15 @@
 package com.example.eag.myapplication;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -27,8 +32,7 @@ public class MainActivity extends BaseActivity {
     CardView cardView;
     TextView tvIndice;
     Toolbar toolbar;
-
-
+    StationsMadininair stationMadininair;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +42,24 @@ public class MainActivity extends BaseActivity {
         toolbar = (Toolbar) findViewById(R.id.tb_acceuil);
         setSupportActionBar(toolbar);
 
-
         tvIndice = (TextView)findViewById(R.id.tvIndice);
         cardView = (CardView)findViewById(R.id.cvATMO);
+
+
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        {
+            // A Défaut, l'on force la localisation de "FDF - Lycée Bellevue"
+            stationMadininair= new StationsMadininair(14.602902, 61.077537);
+        } else
+        {
+            LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+            //TODO: a controler si cela fonctionne avec d'autres périphériques
+            Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            stationMadininair= new StationsMadininair(loc.getLatitude(), loc.getLongitude());
+        }
+
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +80,7 @@ public class MainActivity extends BaseActivity {
         if(atmoElements == null)
             new AtmoMadininair().execute();
     }
+
 
     //ajout d'un menu personnaliser
     @Override

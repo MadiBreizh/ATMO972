@@ -2,6 +2,8 @@ package com.example.eag.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
+import android.location.LocationProvider;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +18,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,6 +28,7 @@ import java.util.List;
 public abstract class BaseActivity extends AppCompatActivity {
 
     AtmoElement[] atmoElements = null;
+
 
     //action à mener sur le clic d'une option
     @Override
