@@ -28,6 +28,9 @@ dependencies {
     // https://mvnrepository.com/artifact/com.opencsv/opencsv
     compile group: 'com.opencsv', name: 'opencsv', version: '3.7'
 
+    // MPAndroidChart -  Android chart view
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
+
     //material Design
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

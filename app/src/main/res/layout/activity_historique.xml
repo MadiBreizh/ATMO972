@@ -18,6 +18,13 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/AppTheme" />
 
+    <RelativeLayout
+        android:id="@+id/rlGraphHistorique"
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+    </RelativeLayout>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvHistorique"
         android:layout_width="match_parent"
@@ -25,6 +32,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+    </android.support.v7.widget.RecyclerView>
 
 </LinearLayout>

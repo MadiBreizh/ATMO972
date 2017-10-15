@@ -1,6 +1,5 @@
 package com.example.eag.myapplication;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -9,13 +8,24 @@ import java.util.GregorianCalendar;
 public class Utilites {
 
 
-    public static String recupererDate(final int jour){
+    public static String formatDateLong(final int jour){
 
         GregorianCalendar cal = new GregorianCalendar();
         cal.add(Calendar.DAY_OF_MONTH, jour);
         Date date = cal.getTime();
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+
+        return sdf.format(date);
+    }
+
+    public static String formatDateCourt(final int jour){
+
+        GregorianCalendar cal = new GregorianCalendar();
+        cal.add(Calendar.DAY_OF_MONTH, jour);
+        Date date = cal.getTime();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM");
 
         return sdf.format(date);
     }

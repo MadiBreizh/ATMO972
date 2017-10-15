@@ -87,13 +87,13 @@ public class MainActivity extends BaseActivity {
                     Context context = getApplicationContext();
                     Intent intent = new Intent(context, HistoriqueActivity.class);
                     intent.putExtra(HistoriqueActivity.ATMO_KEY, atmoElements);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }
             }
         });
 
         //TODO : Implementer uns sauvegarde des donnée sur un changelebt d'orientation
-        //Si pas encore charger (evite de relancer le parse à chaque execution de onCreate. ex: changement orientation)
         if(atmoElements == null)
             new AtmoMadininair().execute();
     }
@@ -110,8 +110,8 @@ public class MainActivity extends BaseActivity {
             uriBuilder.scheme("http")
                     .authority("www.madininair.fr")
                     .appendPath("indice_atmo.php")
-                    .appendQueryParameter("dd", Utilites.recupererDate(nbrJourAntérieur))
-                    .appendQueryParameter("df", Utilites.recupererDate(0))
+                    .appendQueryParameter("dd", Utilites.formatDateLong(nbrJourAntérieur))
+                    .appendQueryParameter("df", Utilites.formatDateLong(0))
                     .build();
 
             URL url = null;
@@ -134,10 +134,9 @@ public class MainActivity extends BaseActivity {
         protected void onPostExecute(AtmoElement[] atmoElements) {
             super.onPostExecute(atmoElements);
 
-            if(atmoElements != null){
-//                Toast.makeText(getApplicationContext(), "Mise à jour réussi", Toast.LENGTH_SHORT).show();
+            if(atmoElements != null)
                 tvIndice.setText(atmoElements[0].getIndice());
-            }
+
 
         }
     }
