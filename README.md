@@ -27,6 +27,7 @@ you can download the application from the folder [APK](APK)
 
 * [Android Studio](https://developer.android.com/studio/index.html) - Official IDE for Android
 * [Opencsv](https://mvnrepository.com/artifact/com.opencsv/opencsv) - CSV parser library
+* [MPAndroidChart](https://github.com/PhilJay/MPAndroidChart) - Chart view / Graph view library
 
 ## Authors
 
