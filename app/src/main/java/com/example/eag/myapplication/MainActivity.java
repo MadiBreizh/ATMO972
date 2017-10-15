@@ -10,9 +10,10 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,6 +34,7 @@ public class MainActivity extends BaseActivity {
     TextView tvIndice, tvStationNearly;
     Toolbar toolbar;
     StationsMadininair stationMadininair;
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class MainActivity extends BaseActivity {
         tvIndice = (TextView)findViewById(R.id.tvIndice);
         tvStationNearly = (TextView)findViewById(R.id.tvStationNearly);
         cardView = (CardView)findViewById(R.id.cvATMO);
+        swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.srlAcceuil);
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
@@ -61,6 +64,19 @@ public class MainActivity extends BaseActivity {
             tvStationNearly.setText("Station proche de votre position : " + Utilites.recupNomStation(stationMadininair.getNumStationNearly()));
         }
 
+        swipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Log.i("REFRESH", "onRefresh called from SwipeRefreshLayout");
+
+                        new AtmoMadininair().execute();
+
+                        //Supression de la l'icone rafraichissement
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                }
+        );
 
         cardView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,14 +96,6 @@ public class MainActivity extends BaseActivity {
         //Si pas encore charger (evite de relancer le parse à chaque execution de onCreate. ex: changement orientation)
         if(atmoElements == null)
             new AtmoMadininair().execute();
-    }
-
-
-    //ajout d'un menu personnaliser
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_acceuil, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
     private class AtmoMadininair extends AsyncTask<Void, Void, AtmoElement[]> {

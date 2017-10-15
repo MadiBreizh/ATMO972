@@ -5,7 +5,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
 
 public class HistoriqueActivity extends BaseActivity {
 
@@ -37,12 +36,6 @@ public class HistoriqueActivity extends BaseActivity {
         rvHistoriqueATMO.setLayoutManager(mLayoutManager);
         rvHistoriqueATMO.setItemAnimator(new DefaultItemAnimator());
         rvHistoriqueATMO.setAdapter(atmoAdaptateur);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_activity, menu);
-        return super.onCreateOptionsMenu(menu);
     }
 
 }

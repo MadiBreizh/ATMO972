@@ -20,9 +20,4 @@ public class AboutActivity extends BaseActivity {
 
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_activity, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
 }
