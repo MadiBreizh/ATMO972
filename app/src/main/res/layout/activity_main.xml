@@ -21,11 +21,12 @@
         android:id="@+id/srlAcceuil"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/tvStationNearly"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tb_acceuil"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintBottom_toTopOf="@+id/tvStationNearly">
+        app:layout_constraintVertical_bias="1.0">
 
 
         <GridLayout
@@ -35,7 +36,7 @@
             <android.support.v7.widget.CardView
                 android:id="@+id/cvATMO"
                 android:layout_width="match_parent"
-                android:layout_height="85dp"
+                android:layout_height="240dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
@@ -55,45 +56,45 @@
 
                     <TextView
                         android:id="@+id/tvQualiteMQ"
-                        android:layout_width="wrap_content"
+                        android:layout_width="360dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:text="@string/qualite_air"
+                        android:textAlignment="center"
                         android:textAppearance="@android:style/TextAppearance.Material.Display1"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginRight="8dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        android:layout_marginLeft="8dp"
+                        app:layout_constraintLeft_toLeftOf="parent" />
+
+                    <com.github.anastr.speedviewlib.SpeedView
+                        android:id="@+id/svATMO"
+                        android:layout_width="250dp"
+                        android:layout_height="250dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="0dp"
                         app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvQualiteMQ"
+                        app:sv_endDegree="360"
+                        app:sv_startDegree="180" />
 
                     <TextView
-                        android:id="@+id/tvIndice"
+                        android:id="@+id/textView4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_column="1"
                         android:layout_marginBottom="8dp"
-                        android:layout_marginEnd="33dp"
-                        android:layout_marginRight="33dp"
-                        android:layout_row="1"
-                        android:layout_weight="1"
-                        android:text="N/A"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:text="Aujourd'hui"
                         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintRight_toRightOf="parent" />
-
-                    <TextView
-                        android:id="@+id/tvTextIndice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_column="0"
-                        android:layout_marginBottom="20dp"
-                        android:layout_marginEnd="24dp"
-                        android:layout_marginRight="24dp"
-                        android:layout_row="1"
-                        android:layout_weight="1"
-                        android:text="@string/message_indice"
-                        android:textAppearance="@style/TextAppearance.AppCompat"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toLeftOf="@+id/tvIndice" />
 
                 </android.support.constraint.ConstraintLayout>
             </android.support.v7.widget.CardView>
@@ -108,8 +109,8 @@
         android:layout_margin="0dp"
         android:text="Identification de la station à proximité ..."
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent" />
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

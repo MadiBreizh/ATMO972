@@ -1,9 +1,7 @@
 package com.example.eag.myapplication;
 
 import android.Manifest;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -20,6 +18,12 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+
+import com.github.anastr.speedviewlib.Gauge;
+import com.github.anastr.speedviewlib.SpeedView;
+import com.github.anastr.speedviewlib.Speedometer;
+import com.github.anastr.speedviewlib.components.Indicators.Indicator;
+import com.github.anastr.speedviewlib.components.Indicators.TriangleIndicator;
 import com.opencsv.CSVReader;
 
 import java.io.BufferedReader;
@@ -35,10 +39,11 @@ public class MainActivity extends BaseActivity {
     private long mBackPressed;
 
     CardView cardView;
-    TextView tvIndice, tvStationNearly;
+    TextView tvStationNearly;
     Toolbar toolbar;
     StationsMadininair stationMadininair;
     SwipeRefreshLayout swipeRefreshLayout;
+    SpeedView svATMO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,10 +53,27 @@ public class MainActivity extends BaseActivity {
         toolbar = (Toolbar) findViewById(R.id.tb_acceuil);
         setSupportActionBar(toolbar);
 
-        tvIndice = (TextView)findViewById(R.id.tvIndice);
         tvStationNearly = (TextView)findViewById(R.id.tvStationNearly);
         cardView = (CardView)findViewById(R.id.cvATMO);
         swipeRefreshLayout = (SwipeRefreshLayout)findViewById(R.id.srlAcceuil);
+
+        svATMO = (SpeedView) findViewById(R.id.svATMO);
+
+        svATMO.setTrembleDegree(0.1F);
+        svATMO.setMinMaxSpeed(1, 10);
+        svATMO.setStartEndDegree(180, 360);
+        svATMO.setIndicator(Indicator.Indicators.SpindleIndicator);
+        svATMO.setLowSpeedPercent(30);
+        svATMO.setMediumSpeedPercent(70);
+        svATMO.setSpeedometerTextRightToLeft(true);
+        svATMO.setUnit("");
+        svATMO.setLowSpeedColor(0xff0099cc);
+        svATMO.setMediumSpeedColor(0xffff8800);
+        svATMO.setHighSpeedColor(0xffaa66cc);
+        svATMO.setTickNumber(10);
+        svATMO.setSpeedTextSize(0);
+        svATMO.setSpeedTextPosition(Speedometer.Position.TOP_CENTER);
+
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                 && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
@@ -72,7 +94,6 @@ public class MainActivity extends BaseActivity {
                 new SwipeRefreshLayout.OnRefreshListener() {
                     @Override
                     public void onRefresh() {
-                        Log.i("REFRESH", "onRefresh called from SwipeRefreshLayout");
 
                         new AtmoMadininair().execute();
 
@@ -110,7 +131,7 @@ public class MainActivity extends BaseActivity {
             super.onBackPressed();
             return;
         }
-        else { Toast.makeText(getBaseContext(), "Appuyer encore pour quitter", Toast.LENGTH_SHORT).show(); }
+        else { Toast.makeText(getBaseContext(), "Appuyer encore pour Quitter", Toast.LENGTH_SHORT).show(); }
 
         mBackPressed = System.currentTimeMillis();
 
@@ -152,8 +173,8 @@ public class MainActivity extends BaseActivity {
         protected void onPostExecute(AtmoElement[] atmoElements) {
             super.onPostExecute(atmoElements);
 
-            if(atmoElements != null)
-                tvIndice.setText(atmoElements[0].getIndice());
+            if(!atmoElements[0].getIndice().equals("--"))
+                svATMO.speedTo((float) Integer.parseInt(atmoElements[0].getIndice()), 2000);
 
 
         }

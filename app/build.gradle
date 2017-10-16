@@ -31,6 +31,9 @@ dependencies {
     // MPAndroidChart -  Android chart view
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.2'
 
+    // CustomGauge
+    compile 'com.github.anastr:speedviewlib:1.1.6'
+
     //material Design
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'

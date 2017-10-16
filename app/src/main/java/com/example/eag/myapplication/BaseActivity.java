@@ -38,6 +38,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             case R.id.menu_about:
                 Context context = getApplicationContext();
                 Intent intent = new Intent(context, AboutActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
                 return true;
             case R.id.menu_contact:
