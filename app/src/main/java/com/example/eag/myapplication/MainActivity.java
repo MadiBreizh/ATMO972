@@ -1,7 +1,9 @@
 package com.example.eag.myapplication;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -29,6 +31,8 @@ import java.util.List;
 
 public class MainActivity extends BaseActivity {
 
+    private static final int TIME_INTERVAL = 2000; // # milliseconds, desired time passed between two back presses.
+    private long mBackPressed;
 
     CardView cardView;
     TextView tvIndice, tvStationNearly;
@@ -98,11 +102,25 @@ public class MainActivity extends BaseActivity {
             new AtmoMadininair().execute();
     }
 
+    @Override
+    public void onBackPressed() {
+
+        if (mBackPressed + TIME_INTERVAL > System.currentTimeMillis())
+        {
+            super.onBackPressed();
+            return;
+        }
+        else { Toast.makeText(getBaseContext(), "Appuyer encore pour quitter", Toast.LENGTH_SHORT).show(); }
+
+        mBackPressed = System.currentTimeMillis();
+
+    }
+
     private class AtmoMadininair extends AsyncTask<Void, Void, AtmoElement[]> {
 
         @Override
         protected AtmoElement[] doInBackground(Void... params) {
-            int nbrJourAntérieur = -15;
+            int nbrJourAntérieur = -55;
 
             Uri.Builder uriBuilder = new Uri.Builder();
 

@@ -58,6 +58,8 @@ public class HistoriqueActivity extends BaseActivity {
 
         BarData lineData = new BarData(dataSet);
         graphiqueHistorique.setData(lineData);
+        graphiqueHistorique.getLegend().setEnabled(false);
+        graphiqueHistorique.getDescription().setEnabled(false);
         graphiqueHistorique.invalidate(); // refresh
 
         // Gestion de l'affichage CardView avec un Recycleur View
