@@ -30,8 +30,8 @@ public class Utilites {
         return sdf.format(date);
     }
 
-    public static String recupNomStation(int numStationNearly){
-        switch (numStationNearly)
+    public static String recupNomStation(int numStation){
+        switch (numStation)
         {
             case 0:
                 return "FDF - Hôtel de Ville";
@@ -59,6 +59,50 @@ public class Utilites {
                 return "Inconnu";
         }
 
+    }
+
+    public static String recupNomCourtPolluant(int numPolluant){
+        switch (numPolluant)
+        {
+            case 0:
+                return "SO2";
+            case 1:
+                return "NO";
+            case 2:
+                return "NO2";
+            case 3:
+                return "O3";
+            case 4:
+                return "NOx";
+            case 5:
+                return "PM10";
+            case 6:
+                return "PM2.5";
+            default:
+                return "Err";
+        }
+    }
+
+    public static String recupNomLongPolluant(int numPolluant){
+        switch (numPolluant)
+        {
+            case 0:
+                return "Dioxyde de souffre";
+            case 1:
+                return "Monoxyde d'azote";
+            case 2:
+                return "Dioxyde d'azote";
+            case 3:
+                return "Ozone";
+            case 4:
+                return "Oxyde d'azote";
+            case 5:
+                return "Particules inférieurs à 10 microns";
+            case 6:
+                return "Particules inférieurs à 2.5 microns";
+            default:
+                return "Erreur !";
+        }
     }
 
 }

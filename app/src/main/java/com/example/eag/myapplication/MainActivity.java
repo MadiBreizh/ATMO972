@@ -141,7 +141,7 @@ public class MainActivity extends BaseActivity {
 
         @Override
         protected AtmoElement[] doInBackground(Void... params) {
-            int nbrJourAntérieur = -55;
+            int nbrJourAntérieur = -15;
 
             Uri.Builder uriBuilder = new Uri.Builder();
 
