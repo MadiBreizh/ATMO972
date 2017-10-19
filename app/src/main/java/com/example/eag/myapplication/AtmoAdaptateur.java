@@ -16,10 +16,10 @@ import android.widget.TextView;
 
 class AtmoAdaptateur extends RecyclerView.Adapter<AtmoAdaptateur.ViewHolder> {
 
-    private AtmoElement[] atmoElements = null;
+    private PointMesure[] PointMesures = null;
 
-    AtmoAdaptateur(AtmoElement[] atmoElements) {
-        this.atmoElements = atmoElements;
+    AtmoAdaptateur(PointMesure[] PointMesures) {
+        this.PointMesures = PointMesures;
     }
 
     //dire à l'adaptateur à quoi ressemble le layout
@@ -39,12 +39,12 @@ class AtmoAdaptateur extends RecyclerView.Adapter<AtmoAdaptateur.ViewHolder> {
         int couleur5 = 0xffffbb33;
         int couleur6_7 = 0xffff8800;
         int couleur8_9 = 0xffff4444;
-        int couleur10 = 0xffaa66cc;
+        int couleur10 = 0xFFFF1744;
         int couleurdefault = 0xffffffff;
 
-        holder.date.setText(atmoElements[position].getDate());
-        holder.indice.setText(atmoElements[position].getIndice());
-        switch (atmoElements[position].getIndice()){
+        holder.date.setText(PointMesures[position].getDate());
+        holder.indice.setText(PointMesures[position].getPoint());
+        switch (PointMesures[position].getPoint()){
             case "1":
             case "2":
                 holder.cvIndiceAtmo.setCardBackgroundColor(couleur1_2);
@@ -66,8 +66,10 @@ class AtmoAdaptateur extends RecyclerView.Adapter<AtmoAdaptateur.ViewHolder> {
                 break;
             case "10":
                 holder.cvIndiceAtmo.setCardBackgroundColor(couleur10);
+                break;
             default:
                 holder.cvIndiceAtmo.setCardBackgroundColor(couleurdefault);
+                break;
         }
 
     }
@@ -75,7 +77,7 @@ class AtmoAdaptateur extends RecyclerView.Adapter<AtmoAdaptateur.ViewHolder> {
     //combien de position existe-t-il
     @Override
     public int getItemCount() {
-        return atmoElements.length;
+        return PointMesures.length;
     }
 
 

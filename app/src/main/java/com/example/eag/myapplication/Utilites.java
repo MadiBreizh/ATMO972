@@ -1,9 +1,16 @@
 package com.example.eag.myapplication;
 
+import com.opencsv.CSVReader;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 import java.util.Locale;
 
 class Utilites {
@@ -110,5 +117,31 @@ class Utilites {
         }
     }
     */
+
+    public static PointMesure[] parseUrlATMO(URL url) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(url.openStream()));
+        CSVReader reader = new CSVReader(in,';');
+
+        List<String[]> contenuCsv = reader.readAll();
+
+        String[] date = contenuCsv.get(0);
+        String[] indice = contenuCsv.get(1);
+
+        PointMesure[] PointMesures = new PointMesure[indice.length];
+
+        for (int i = 0; i < PointMesures.length ; i++) {
+            PointMesures[i] = new PointMesure(date[i], indice[i]);
+        }
+
+        //inverser les éléments du tableau
+        for(int i = 0; i < PointMesures.length / 2; i++)
+        {
+            PointMesure temp = PointMesures[i];
+            PointMesures[i] = PointMesures[PointMesures.length - i - 1];
+            PointMesures[PointMesures.length - i - 1] = temp;
+        }
+
+        return PointMesures;
+    }
 
 }

@@ -8,22 +8,14 @@
     <color name="textColorSecondary">#000</color>
 
     <color name="textColorGraph">#000</color>
-    <color name="barColorGraph">#ff0099CC</color>
+    <color name="barColorGraph">#000</color>
 
     <color name="indiceColor1_2">#ff0099cc</color>
     <color name="indiceColor3_4">#ff33B5E5</color>
     <color name="indiceColor5">#FFFFBB33</color>
     <color name="indiceColor6_7">#FFFF8800</color>
     <color name="indiceColor8_9">#FFFF4444</color>
-    <color name="indiceColor10">#FFAA66CC</color>
+    <color name="indiceColor10">#FFFF1744</color>
     <color name="indiceColorErr">#FFFFFFFF</color>
-
-    int couleur1_2 = 0xff0099cc;
-    int couleur3_4 = 0xff33b5e5;
-    int couleur5 = 0xffffbb33;
-    int couleur6_7 = 0xffff8800;
-    int couleur8_9 = 0xffff4444;
-    int couleur10 = 0xffaa66cc;
-    int couleurdefault = 0xffffffff;
 
 </resources>

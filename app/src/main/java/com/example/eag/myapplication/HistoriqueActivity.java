@@ -17,7 +17,7 @@ import java.util.List;
 
 public class HistoriqueActivity extends BaseActivity {
 
-    AtmoElement[] atmoElements = null;
+    PointMesure[] PointMesures = null;
     RecyclerView rvHistoriqueATMO;
     AtmoAdaptateur atmoAdaptateur;
     Toolbar toolbar;
@@ -32,7 +32,7 @@ public class HistoriqueActivity extends BaseActivity {
         setContentView(R.layout.activity_historique);
 
         // Récupération des données
-        atmoElements = (AtmoElement[]) getIntent().getSerializableExtra(ATMO_KEY);
+        PointMesures = (PointMesure[]) getIntent().getSerializableExtra(ATMO_KEY);
 
         // Gestion de l'ActionBar
         toolbar = (Toolbar) findViewById(R.id.tb_historique);
@@ -46,9 +46,10 @@ public class HistoriqueActivity extends BaseActivity {
         final RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
         rlGraphHistorique.addView(graphiqueHistorique,lp);
 
-        List<BarEntry> entries = getEntries(atmoElements);
+        List<BarEntry> entries = getEntries(PointMesures);
 
         BarDataSet dataSet = new BarDataSet(entries, "Graphique Historique");
+        //TODO : ne fonctionne pas avec le fichier de ressource colors
         dataSet.setColor(R.color.barColorGraph);
         dataSet.setValueTextColor(R.color.textColorGraph);
 
@@ -65,29 +66,29 @@ public class HistoriqueActivity extends BaseActivity {
         // sur deux lignes
         rvHistoriqueATMO.setLayoutManager(mLayoutManager);
         rvHistoriqueATMO.setItemAnimator(new DefaultItemAnimator());
-        atmoAdaptateur = new AtmoAdaptateur(atmoElements);
+        atmoAdaptateur = new AtmoAdaptateur(PointMesures);
         rvHistoriqueATMO.setAdapter(atmoAdaptateur);
     }
 
 
-    private List<BarEntry> getEntries(AtmoElement[] atmoElements) {
+    private List<BarEntry> getEntries(PointMesure[] PointMesures) {
 
         //Vérifier si la fonction clone est la meilleur methode
-        AtmoElement[] tabElements = atmoElements.clone();
+        PointMesure[] tabElements = PointMesures.clone();
         //inverser les éléments du tableau
         for(int i = 0; i < tabElements.length / 2; i++)
         {
-            AtmoElement temp = tabElements[i];
+            PointMesure temp = tabElements[i];
             tabElements[i] = tabElements[tabElements.length - i - 1];
             tabElements[tabElements.length - i - 1] = temp;
         }
 
         List<BarEntry> entries = new ArrayList<>();
         int i=0;
-        for (AtmoElement element : tabElements) {
+        for (PointMesure element : tabElements) {
             float indice = 0;
-            if(!element.getIndice().equals("--")){
-                indice = (float) Integer.parseInt(element.getIndice());
+            if(!element.getPoint().equals("--")){
+                indice = (float) Integer.parseInt(element.getPoint());
             }
             // turn your data into Entry objects
             entries.add(new BarEntry((float) i, indice));

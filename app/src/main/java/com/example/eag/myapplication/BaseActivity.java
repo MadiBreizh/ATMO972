@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 public abstract class BaseActivity extends AppCompatActivity {
 
-    AtmoElement[] atmoElements = null;
+    PointMesure[] PointMesures = null;
 
 
     //action à mener sur le clic d'une option
