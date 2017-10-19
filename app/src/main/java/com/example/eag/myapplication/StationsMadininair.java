@@ -6,22 +6,16 @@ import android.util.Log;
 
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
 
-public class StationsMadininair {
+class StationsMadininair {
 
-    Location positionUtilisateur;
-
-    int numStationNearly;
-
-    int interDate;
-
-    String[] listePolluants = {"01", "02", "03", "08", "12", "24", "39"};
-    String[] listeStations = {"015", "010", "011", "003", "017", "008", "014", "016", "009", "018", "019"};
-
-    URL[][] urlsCSV;
-
-    double[][] positionsStations = {
+    private int numStationNearly;
+    private int interDate;
+    private String[] listePolluants = {"01", "02", "03", "08", "12", "24", "39"};
+    private String[] listeStations = {"015", "010", "011", "003", "017", "008", "014", "016", "009", "018", "019"};
+    private URL[][] urlsCSV;
+    private Location positionUtilisateur;
+    private double[][] positionsStations = {
             {14.606037, -61.065276}, // 0 - FDF - Hotel de Ville
             {14.613585, -61.063941}, // 1 - FDF - Rocade Concorde
             {14.614324, -61.053169}, // 2 - FDF - Renéville
@@ -34,8 +28,7 @@ public class StationsMadininair {
             {14.755501, -61.179013}, // 9 - Saint-Pierre - CDST
             {14.633220, -60.899796}, // 10 - Le François - Pointe Couchée
     };
-
-    boolean[][] etatAnalyseSite = {
+    private boolean[][] etatAnalyseSite = {
                     {false, false, false, false, false, false, true}, // Fort-de-France, Hôtel de Ville
                     {false, true, true, false, true, false, false}, // Fort-de-France, rocade Concorde
                     {false, true, true, false, true, true, false}, // Fort-de-France, Renéville
@@ -49,7 +42,7 @@ public class StationsMadininair {
                     {false, false, false, false, false, true, false}, // François, Pointe Couchée
             };
 
-    public StationsMadininair(double latitudePhone, double longitudePhone) {
+    StationsMadininair(double latitudePhone, double longitudePhone) {
         initialiseLocalisation(latitudePhone, longitudePhone);
 
         urlsCSV = new URL[listeStations.length][listePolluants.length];
@@ -61,10 +54,10 @@ public class StationsMadininair {
 
 
     private void generateUrls() {
-        Uri.Builder uriBuilder = null;
-        //http://www.madininair.fr/mesure_fixe.php?type=p&stations=xxx&polluants=xx&dd=YYY-MM-DD&df=YYYY-MM-DD&type_calendar=_XRWEB_Day
-        // Pour chaque station
+        Uri.Builder uriBuilder ;
+        // Pour chaques stations
         for (int i = 0; i < listeStations.length ; i++) {
+            // Pour chaques polluants
             for (int j = 0; j < listePolluants.length; j++) {
                 //Si une analyse existe, on génère l'url
                 if(etatAnalyseSite[i][j])
@@ -131,7 +124,7 @@ public class StationsMadininair {
 
     }
 
-    public int getNumStationNearly() {
+    int getNumStationNearly() {
         return numStationNearly;
     }
 

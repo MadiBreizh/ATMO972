@@ -13,17 +13,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.github.anastr.speedviewlib.Gauge;
 import com.github.anastr.speedviewlib.SpeedView;
 import com.github.anastr.speedviewlib.Speedometer;
 import com.github.anastr.speedviewlib.components.Indicators.Indicator;
-import com.github.anastr.speedviewlib.components.Indicators.TriangleIndicator;
 import com.opencsv.CSVReader;
 
 import java.io.BufferedReader;
@@ -80,14 +77,16 @@ public class MainActivity extends BaseActivity {
         {
             // Sur Défaut, l'on force la localisation de "FDF - Lycée Bellevue"
             stationMadininair= new StationsMadininair(14.602902, 61.077537);
-            tvStationNearly.setText("Recherche d'une station à proximité impossible");
+            tvStationNearly.setText(R.string.find_station_error);
         } else
         {
             LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
             //TODO: a controler si cela fonctionne avec d'autres périphériques
             Location loc = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
             stationMadininair= new StationsMadininair(loc.getLatitude(), loc.getLongitude());
-            tvStationNearly.setText("Station proche de votre position : " + Utilites.recupNomStation(stationMadininair.getNumStationNearly()));
+            tvStationNearly.setText(String.format("%s : %s",
+                    getString(R.string.display_station_nearly),
+                    Utilites.recupNomStation(stationMadininair.getNumStationNearly())));
         }
 
         swipeRefreshLayout.setOnRefreshListener(
@@ -107,7 +106,7 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(atmoElements == null)
-                    Toast.makeText(MainActivity.this, "Pas de données pour l'historique", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, R.string.historique_data_empty, Toast.LENGTH_SHORT).show();
                 else {
                     Context context = getApplicationContext();
                     Intent intent = new Intent(context, HistoriqueActivity.class);

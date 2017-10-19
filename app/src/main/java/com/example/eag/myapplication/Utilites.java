@@ -4,33 +4,35 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 
-public class Utilites {
+class Utilites {
 
 
-    public static String formatDateLong(final int jour){
+    static String formatDateLong(final int jour){
 
         GregorianCalendar cal = new GregorianCalendar();
         cal.add(Calendar.DAY_OF_MONTH, jour);
         Date date = cal.getTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.FRENCH);
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-
-        return sdf.format(date);
+        return simpleDateFormat.format(date);
     }
 
+    /*
     public static String formatDateCourt(final int jour){
 
         GregorianCalendar cal = new GregorianCalendar();
         cal.add(Calendar.DAY_OF_MONTH, jour);
         Date date = cal.getTime();
 
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MM", Locale.FRENCH);
 
-        return sdf.format(date);
+        return simpleDateFormat.format(date);
     }
+    */
 
-    public static String recupNomStation(int numStation){
+    static String recupNomStation(int numStation){
         switch (numStation)
         {
             case 0:
@@ -61,7 +63,8 @@ public class Utilites {
 
     }
 
-    public static String recupNomCourtPolluant(int numPolluant){
+    /*
+    static String recupNomCourtPolluant(int numPolluant){
         switch (numPolluant)
         {
             case 0:
@@ -82,7 +85,9 @@ public class Utilites {
                 return "Err";
         }
     }
+    */
 
+    /*
     public static String recupNomLongPolluant(int numPolluant){
         switch (numPolluant)
         {
@@ -104,5 +109,6 @@ public class Utilites {
                 return "Erreur !";
         }
     }
+    */
 
 }

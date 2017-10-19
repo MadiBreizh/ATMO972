@@ -1,6 +1,6 @@
 package com.example.eag.myapplication;
 
-import android.graphics.Color;
+
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,13 +11,14 @@ import android.widget.TextView;
 
 /**
  * Created by EAG on 02/09/2017.
+ * Adaptateur de la vue historique
  */
 
-public class AtmoAdaptateur extends RecyclerView.Adapter<AtmoAdaptateur.ViewHolder> {
+class AtmoAdaptateur extends RecyclerView.Adapter<AtmoAdaptateur.ViewHolder> {
 
-    AtmoElement[] atmoElements = null;
+    private AtmoElement[] atmoElements = null;
 
-    public AtmoAdaptateur(AtmoElement[] atmoElements) {
+    AtmoAdaptateur(AtmoElement[] atmoElements) {
         this.atmoElements = atmoElements;
     }
 
@@ -78,12 +79,12 @@ public class AtmoAdaptateur extends RecyclerView.Adapter<AtmoAdaptateur.ViewHold
     }
 
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
         TextView date;
         TextView indice;
         CardView cvIndiceAtmo;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
             date = (TextView) itemView.findViewById(R.id.tvDate);
             indice = (TextView) itemView.findViewById(R.id.tvIndice);

@@ -12,4 +12,7 @@
     <string name="version">Version : Développement</string>
     <string name="txt_licence"><u>Licences open source</u></string>
     <string name="descrition_logo">Logo de l\'application</string>
+    <string name="find_station_error">Recherche d\'une station à proximité impossible</string>
+    <string name="display_station_nearly">Station proche de votre position</string>
+    <string name="historique_data_empty">Pas de données pour l\'historique</string>
 </resources>

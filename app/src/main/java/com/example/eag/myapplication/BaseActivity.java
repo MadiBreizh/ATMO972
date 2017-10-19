@@ -2,29 +2,11 @@ package com.example.eag.myapplication;
 
 import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
-import android.location.LocationProvider;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.opencsv.CSVReader;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-
-/**
- * Created by Erwan on 01/10/2017.
- */
 
 public abstract class BaseActivity extends AppCompatActivity {
 

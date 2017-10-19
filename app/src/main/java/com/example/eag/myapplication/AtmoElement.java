@@ -4,13 +4,14 @@ import java.io.Serializable;
 
 /**
  * Created by EAG on 30/08/2017.
+ *
  */
 
-public class AtmoElement implements Serializable {
+class AtmoElement implements Serializable {
 
     private String date, indice;
 
-    public AtmoElement(String date, String indice){
+    AtmoElement(String date, String indice){
         this.date = date;
         if(indice.equals("0"))
             this.indice = "--";
@@ -18,20 +19,12 @@ public class AtmoElement implements Serializable {
             this.indice = indice;
     }
 
-    public String getDate() {
+    String getDate() {
         return date;
     }
 
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    public String getIndice() {
+    String getIndice() {
         return indice;
-    }
-
-    public void setIndice(String indice) {
-        this.indice = indice;
     }
 
     @Override

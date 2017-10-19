@@ -8,13 +8,9 @@ import android.support.v7.widget.Toolbar;
 import android.widget.RelativeLayout;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,6 +39,7 @@ public class HistoriqueActivity extends BaseActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+
         // Gestion de l'affichage graphique
         rlGraphHistorique = (RelativeLayout) findViewById(R.id.rlGraphHistorique);
         graphiqueHistorique = new BarChart(getApplicationContext());
@@ -52,8 +49,8 @@ public class HistoriqueActivity extends BaseActivity {
         List<BarEntry> entries = getEntries(atmoElements);
 
         BarDataSet dataSet = new BarDataSet(entries, "Graphique Historique");
-        dataSet.setColor(0xff0099cc);
-        dataSet.setValueTextColor(0x00000000);
+        dataSet.setColor(R.color.barColorGraph);
+        dataSet.setValueTextColor(R.color.textColorGraph);
 
 
         BarData lineData = new BarData(dataSet);
@@ -66,7 +63,6 @@ public class HistoriqueActivity extends BaseActivity {
         rvHistoriqueATMO = (RecyclerView) findViewById(R.id.rvHistorique);
         RecyclerView.LayoutManager  mLayoutManager = new LinearLayoutManager(getApplicationContext());
         // sur deux lignes
-        //RecyclerView.LayoutManager  mLayoutManager = new GridLayoutManager(getApplicationContext(), 2);
         rvHistoriqueATMO.setLayoutManager(mLayoutManager);
         rvHistoriqueATMO.setItemAnimator(new DefaultItemAnimator());
         atmoAdaptateur = new AtmoAdaptateur(atmoElements);
@@ -76,20 +72,22 @@ public class HistoriqueActivity extends BaseActivity {
 
     private List<BarEntry> getEntries(AtmoElement[] atmoElements) {
 
+        //Vérifier si la fonction clone est la meilleur methode
+        AtmoElement[] tabElements = atmoElements.clone();
         //inverser les éléments du tableau
-        for(int i = 0; i < atmoElements.length / 2; i++)
+        for(int i = 0; i < tabElements.length / 2; i++)
         {
-            AtmoElement temp = atmoElements[i];
-            atmoElements[i] = atmoElements[atmoElements.length - i - 1];
-            atmoElements[atmoElements.length - i - 1] = temp;
+            AtmoElement temp = tabElements[i];
+            tabElements[i] = tabElements[tabElements.length - i - 1];
+            tabElements[tabElements.length - i - 1] = temp;
         }
 
         List<BarEntry> entries = new ArrayList<>();
         int i=0;
-        for (AtmoElement atmoElement : atmoElements) {
+        for (AtmoElement element : tabElements) {
             float indice = 0;
-            if(!atmoElement.getIndice().equals("--")){
-                indice = (float) Integer.parseInt(atmoElement.getIndice());
+            if(!element.getIndice().equals("--")){
+                indice = (float) Integer.parseInt(element.getIndice());
             }
             // turn your data into Entry objects
             entries.add(new BarEntry((float) i, indice));
