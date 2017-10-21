@@ -14,21 +14,6 @@
         android:minHeight="?attr/actionBarSize"
         android:theme="@style/AppTheme" />
 
-
-    <!--<android.support.v7.widget.RecyclerView-->
-        <!--android:id="@+id/rvHistorique"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="200dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintLeft_toLeftOf="parent"-->
-        <!--app:layout_constraintRight_toRightOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent"-->
-        <!--android:layout_below="@+id/tb_historique"-->
-        <!--android:layout_alignParentLeft="true"-->
-        <!--android:layout_alignParentStart="true">-->
-
-    <!--</android.support.v7.widget.RecyclerView>-->
-
     <FrameLayout
         android:id="@+id/fl_content_historique"
         android:layout_width="match_parent"
