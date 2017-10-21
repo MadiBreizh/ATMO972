@@ -15,4 +15,7 @@
     <string name="find_station_error">Recherche d\'une station à proximité impossible</string>
     <string name="display_station_nearly">Station proche de votre position</string>
     <string name="historique_data_empty">Pas de données pour l\'historique</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

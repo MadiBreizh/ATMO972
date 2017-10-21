@@ -1,15 +1,17 @@
 package com.example.eag.myapplication;
 
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.MenuItem;
 import android.widget.RelativeLayout;
 
 import com.github.mikephil.charting.charts.BarChart;
-import com.github.mikephil.charting.data.BarData;
-import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 
 import java.util.ArrayList;
@@ -17,12 +19,9 @@ import java.util.List;
 
 public class HistoriqueActivity extends BaseActivity {
 
-    PointMesure[] PointMesures = null;
-    RecyclerView rvHistoriqueATMO;
-    AtmoAdaptateur atmoAdaptateur;
+    PointMesure[] pointMesures = null;
     Toolbar toolbar;
-    BarChart graphiqueHistorique;
-    RelativeLayout rlGraphHistorique;
+    BottomNavigationView bottomNavigationView;
 
     public static String ATMO_KEY = "DATA_ATMO";
 
@@ -32,69 +31,60 @@ public class HistoriqueActivity extends BaseActivity {
         setContentView(R.layout.activity_historique);
 
         // Récupération des données
-        PointMesures = (PointMesure[]) getIntent().getSerializableExtra(ATMO_KEY);
+        pointMesures = (PointMesure[]) getIntent().getSerializableExtra(ATMO_KEY);
 
         // Gestion de l'ActionBar
         toolbar = (Toolbar) findViewById(R.id.tb_historique);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bnv_historique);
 
-        // Gestion de l'affichage graphique
-        rlGraphHistorique = (RelativeLayout) findViewById(R.id.rlGraphHistorique);
-        graphiqueHistorique = new BarChart(getApplicationContext());
-        final RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
-        rlGraphHistorique.addView(graphiqueHistorique,lp);
-
-        List<BarEntry> entries = getEntries(PointMesures);
-
-        BarDataSet dataSet = new BarDataSet(entries, "Graphique Historique");
-        //TODO : ne fonctionne pas avec le fichier de ressource colors
-        dataSet.setColor(R.color.barColorGraph);
-        dataSet.setValueTextColor(R.color.textColorGraph);
+        Bundle arguments = new Bundle();
+        arguments.putSerializable(HistoriqueActivity.ATMO_KEY, pointMesures);
+        HistoriqueGraphFragment historiqueGraphFragment = new HistoriqueGraphFragment();
+        historiqueGraphFragment.setArguments(arguments);
 
 
-        BarData lineData = new BarData(dataSet);
-        graphiqueHistorique.setData(lineData);
-        graphiqueHistorique.getLegend().setEnabled(false);
-        graphiqueHistorique.getDescription().setEnabled(false);
-        graphiqueHistorique.invalidate(); // refresh
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fl_content_historique, historiqueGraphFragment).commit();
 
-        // Gestion de l'affichage CardView avec un Recycleur View
-        rvHistoriqueATMO = (RecyclerView) findViewById(R.id.rvHistorique);
-        RecyclerView.LayoutManager  mLayoutManager = new LinearLayoutManager(getApplicationContext());
-        // sur deux lignes
-        rvHistoriqueATMO.setLayoutManager(mLayoutManager);
-        rvHistoriqueATMO.setItemAnimator(new DefaultItemAnimator());
-        atmoAdaptateur = new AtmoAdaptateur(PointMesures);
-        rvHistoriqueATMO.setAdapter(atmoAdaptateur);
+        bottomNavigationView.setOnNavigationItemSelectedListener(
+                new BottomNavigationView.OnNavigationItemSelectedListener(){
+
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        FragmentManager fragmentManager = getSupportFragmentManager();
+                        FragmentTransaction transaction = fragmentManager.beginTransaction();
+                        Bundle arguments = new Bundle();
+                        switch (item.getItemId()){
+                            case R.id.action_graphique :
+                                arguments.putSerializable(HistoriqueActivity.ATMO_KEY, pointMesures);
+                                HistoriqueGraphFragment historiqueGraphFragment = new HistoriqueGraphFragment();
+                                historiqueGraphFragment.setArguments(arguments);
+
+                                transaction.replace(R.id.fl_content_historique, historiqueGraphFragment).commit();
+                                break;
+                            case R.id.action_tab :
+                                arguments.putSerializable(HistoriqueActivity.ATMO_KEY, pointMesures);
+                                HistoriqueListFragment historiqueListFragment = new HistoriqueListFragment();
+                                historiqueListFragment.setArguments(arguments);
+
+                                transaction.replace(R.id.fl_content_historique, historiqueListFragment).commit();
+                                break;
+                        }
+                        return false;
+                    }
+                }
+        );
+
+
+//
+
     }
 
 
-    private List<BarEntry> getEntries(PointMesure[] PointMesures) {
 
-        //Vérifier si la fonction clone est la meilleur methode
-        PointMesure[] tabElements = PointMesures.clone();
-        //inverser les éléments du tableau
-        for(int i = 0; i < tabElements.length / 2; i++)
-        {
-            PointMesure temp = tabElements[i];
-            tabElements[i] = tabElements[tabElements.length - i - 1];
-            tabElements[tabElements.length - i - 1] = temp;
-        }
-
-        List<BarEntry> entries = new ArrayList<>();
-        int i=0;
-        for (PointMesure element : tabElements) {
-            float indice = 0;
-            if(!element.getPoint().equals("--")){
-                indice = (float) Integer.parseInt(element.getPoint());
-            }
-            // turn your data into Entry objects
-            entries.add(new BarEntry((float) i, indice));
-        i++;
-        }
-        return entries;
-    }
 
 }
